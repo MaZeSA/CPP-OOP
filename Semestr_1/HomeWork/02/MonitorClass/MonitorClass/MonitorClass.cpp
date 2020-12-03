@@ -9,10 +9,11 @@ public:
     Monitor()
     {
     }
-    Monitor(double screenSize, string name)
+    Monitor(double screenSize, string name, double price)
     {
         this->screenSize = screenSize;
         this->name = name;
+        this->price = price;
     }
 
     void Print()
@@ -22,16 +23,26 @@ public:
             << "Size: " << screenSize << endl
             << "Color Rendering: " << colorRendering << endl
             << "Contrast: " << contrast << endl
-            << "Frequency: " << frequency << endl;
+            << "Frequency: " << frequency << endl
+            << "Price: " << price << endl;
     }
 
     double GetScreenSize()
     {
         return this->screenSize;
-    } 
+    }
     void SetScreenSize(double screenSize)
     {
         this->screenSize = screenSize;
+    }  
+    
+    double GetPrice()
+    {
+        return this->price;
+    }
+    void SetPrice(double price)
+    {
+        this->price = price;
     }
 
     int* GetResolution()
@@ -87,7 +98,8 @@ public:
 
 private:
 
-    double screenSize = 14;
+    double screenSize = 14;  
+    double price = 1000;
     int resolution[2] = { 800, 600 };
     int colorRendering = 32;
     string contrast = "1000:1";
@@ -143,9 +155,12 @@ Monitor* CreateNewMonitor()
     cin >> name;
     cout << "Enter Size Monitor -> ";
     double size = 0;
-    cin >> size;
+    cin >> size;   
+    cout << "Enter Price Monitor -> ";
+    double price = 0;
+    cin >> price;
 
-    Monitor monitor(size, name);
+    Monitor monitor(size, name, price);
     MenuMonitor(monitor);
     return &monitor;
 }
@@ -161,6 +176,7 @@ void ChangeParameters(Monitor& monitor)
             << "4. Change Color Rendering\n"
             << "5. Change Contrast\n"
             << "6. Change Frequency\n"
+            << "7. Change Price\n"
             << "0. Back\n";
         cin >> s;
 
@@ -223,6 +239,17 @@ void ChangeParameters(Monitor& monitor)
             monitor.SetFrequency(Frequency);
             system("cls");
             break;
+
+        }  
+        case 7:
+        {
+            cout << "Enter New Price-> ";
+            double price;
+            cin >> price;
+            monitor.SetPrice(price);
+            system("cls");
+            break;
+
         }
         case 0:
             system("cls");
