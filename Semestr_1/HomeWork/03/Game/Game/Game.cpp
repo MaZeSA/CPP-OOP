@@ -38,9 +38,11 @@ public:
         SetLife(-damage);
     } 
     void SetLife(int life)
-    {
-        cout << " >> Атака на юніта " << this->GetUnitType() << " наносить " << to_string(life) << " пошкоджень\n";
+    { 
         this->hp += life;
+        cout << " >> Атака на юніта " << this->GetUnitType() << " наносить " << to_string(life) << " пошкоджень"
+            << "   Лишилося " <<this->GetHp() <<" здоровя.\n";
+      
         if (this->hp <= 0)
             cout << "    >> Юніт мертвий!\n";
     }
