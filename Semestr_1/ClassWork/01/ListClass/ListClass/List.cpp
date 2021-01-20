@@ -157,17 +157,16 @@ void List::Clear()
 Node& List::operator[](const int index)
 {
 	Node* temp = pHead;
-	int ReturnIndex = -1;
-	while (temp->pNext)
-	{
-		ReturnIndex++;
+	int ReturnIndex = 0;
+	if(temp)
+	  while (temp->pNext)
+	  {
 		if (ReturnIndex == index)
 			return *temp;
-		else if (ReturnIndex > index)
-			break;
-
+		
+		ReturnIndex++;
 		temp = temp->pNext;
-	}
+	  }
 
 	throw ("Array index out of bounds");
 }
