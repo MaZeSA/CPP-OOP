@@ -158,15 +158,14 @@ Node& List::operator[](const int index)
 {
 	Node* temp = pHead;
 	int ReturnIndex = 0;
-	if(temp)
-	  while (temp->pNext)
-	  {
+	while (temp)
+	{
 		if (ReturnIndex == index)
 			return *temp;
 		
 		ReturnIndex++;
 		temp = temp->pNext;
-	  }
+	}
 
 	throw ("Array index out of bounds");
 }
