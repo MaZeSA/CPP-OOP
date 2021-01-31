@@ -102,6 +102,7 @@ void List::delByIndex(const int index)
 	{
 		Node* before = &(*this)[index-1];
 		before->pNext = temp->pNext;
+		delete temp;
 	}
 
 	count--;
