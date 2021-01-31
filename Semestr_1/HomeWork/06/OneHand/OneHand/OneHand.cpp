@@ -106,7 +106,7 @@ int main()
 
 	system("cls");
 	cout << "The one-armed bandit!\n"
-		<< "Rate-> " << action;
+		<< "Rate-> " << action; //ставка користувача
 
 	while (game.GetPoints())
 	{
