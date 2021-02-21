@@ -1,0 +1,15 @@
+﻿  Activity.cpp
+D:\IT\CPP-OOP\Semestr_1\Kyrsova\SpaceBattleConsole\Activity.h(1,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  ConsoleColor.cpp
+  Fild.cpp
+D:\IT\CPP-OOP\Semestr_1\Kyrsova\SpaceBattleConsole\Activity.h(1,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  GameLine.cpp
+D:\IT\CPP-OOP\Semestr_1\Kyrsova\SpaceBattleConsole\Activity.h(1,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  SetCursor.cpp
+  Ship.cpp
+  SpaceBattleConsole.cpp
+D:\IT\CPP-OOP\Semestr_1\Kyrsova\SpaceBattleConsole\Activity.h(1,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  ObjActivity.cpp
+D:\IT\CPP-OOP\Semestr_1\Kyrsova\SpaceBattleConsole\Activity.h(1,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+  Создание кода...
+  SpaceBattleConsole.vcxproj -> D:\IT\CPP-OOP\Semestr_1\Kyrsova\x64\Debug\SpaceBattleConsole.exe
