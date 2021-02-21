@@ -33,7 +33,7 @@ int main()
 
 	setCursorPosition(0, 22);
 	std::cout << "Test end run\n"
-		<< "Player 1 >> 'Up', 'Down', fire >'Spase'\n"
+		<< "Player 1 >> 'W', 'S', fire >'Spase'\n"
 		<< "Player 2 >> 'num 8', 'num 2', fire >'num 0'\n";
 
 	fild.Play();

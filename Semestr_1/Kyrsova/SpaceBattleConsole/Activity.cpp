@@ -61,46 +61,52 @@ bool Activity::HitCheck(Ship* ship_)
 void Activity::SetState(int moveIndex_, TypeActyvity type_, Ship* ship_)
 {
     if (this == NULL)
-    {
-       // ship_->ReturnAmunition();
         return;
-    }
 
-    if (this->typeMe == Activity::TypeActyvity::bullet)
-    {
-        this->moveIndex = 0;
-        this->typeMe = Activity::TypeActyvity::none;
-        ship_->ReturnAmunition();
-        ship_->GetEnemy()->ReturnAmunition();
-    }
-    else if (this->typeMe == Activity::TypeActyvity::hp)
-    {
-        this->moveIndex = 0;
-        this->typeMe = Activity::TypeActyvity::none;
-        ship_->SetHP(1);
-        ship_->ReturnAmunition();
-    }
-    else if (this->typeMe == Activity::TypeActyvity::ammunition)
-    {
-        this->moveIndex = 0;
-        this->typeMe = Activity::TypeActyvity::none;
-        ship_->AddAmunition();
-        ship_->ReturnAmunition();
-    }
-    else if (this->typeMe == Activity::TypeActyvity::amor)
-    {
-        this->moveIndex = 0;
-        this->typeMe = Activity::TypeActyvity::none;
-        ship_->SetShield(true);
-        ship_->ReturnAmunition();
-    }
-    else
+    if (this->typeMe == Activity::TypeActyvity::none)
     {
         moveIndex = moveIndex_;
         typeMe = type_;
         this->ownerShip = ship_;
     }
-
+    else if (ship_ != nullptr)
+    {
+        if (this->typeMe == Activity::TypeActyvity::bullet)
+        {
+            this->moveIndex = 0;
+            this->typeMe = Activity::TypeActyvity::none;
+            ship_->ReturnAmunition();
+            ship_->GetEnemy()->ReturnAmunition();
+        }
+        else if (this->typeMe == Activity::TypeActyvity::hp)
+        {
+            this->moveIndex = 0;
+            this->typeMe = Activity::TypeActyvity::none;
+            ship_->SetHP(1);
+            ship_->ReturnAmunition();
+        }
+        else if (this->typeMe == Activity::TypeActyvity::ammunition)
+        {
+            this->moveIndex = 0;
+            this->typeMe = Activity::TypeActyvity::none;
+            ship_->AddAmunition();
+            ship_->ReturnAmunition();
+        }
+        else if (this->typeMe == Activity::TypeActyvity::amor)
+        {
+            this->moveIndex = 0;
+            this->typeMe = Activity::TypeActyvity::none;
+            ship_->SetShield(true);
+            ship_->ReturnAmunition();
+        }
+        else if (this->typeMe == Activity::TypeActyvity::up)
+        {
+            this->moveIndex = 0;
+            this->typeMe = Activity::TypeActyvity::none;
+            ship_->SetUp(true);
+            ship_->ReturnAmunition();
+        }
+    }
     if (ship_ != nullptr)
         if (ship_->GetSide() == Ship::Side::LEFT)
         {

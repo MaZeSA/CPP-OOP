@@ -8,8 +8,6 @@ using namespace std;
 class Fild
 {
 public:
-
-	
 	
 	Fild(int, int, int );
 	void PreparationFild();
@@ -18,6 +16,7 @@ public:
 	void UpdateFild();
 	void Play();
 	void ShipFire(Ship* ship_);
+	void Fire(Ship*, int, int, int);
 	void GenerateActivity();
 	int GetMinGen();
 	int GetMaxGen();

@@ -146,7 +146,6 @@
     <ClCompile Include="SetCursor.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SpaceBattleConsole.cpp" />
-    <ClCompile Include="ObjActivity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activity.h" />

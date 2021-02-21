@@ -20,10 +20,10 @@ void Fild::PreparationFild()
 {
 	setCursorPosition(X / 2 - 3, 0);
 	std::cout << "DevMode";	
-	setCursorPosition(X / 2 - 3, 1);
-	std::cout << "<Lives>"; 
-	setCursorPosition(X / 2 - 6, 2);
-	std::cout << "<Amunitions>";
+	//setCursorPosition(X / 2 - 3, 1);
+	//std::cout << "<Lives>"; 
+	//setCursorPosition(X / 2 - 6, 2);
+	//std::cout << "<Amunitions>";
 
 	ship_L.SetShipColor(FG_COLORS::FG_LIGHTRED);
 	ship_R.SetShipColor(FG_COLORS::FG_LIGHTBLUE);
@@ -33,6 +33,8 @@ void Fild::PreparationFild()
 	ship_R.SetPosition(this->retreat + 10, X);
 	ship_L.PrintLife();	
 	ship_R.PrintLife();
+	ship_L.PrintShield(); 
+	ship_R.PrintShield();
 	ship_L.PrintAmunition(); 
 	ship_R.PrintAmunition();
 }
@@ -77,7 +79,7 @@ void Fild::Play()
 		
 GenerateActivity(); //test
 
-		if (GetAsyncKeyState(VK_UP) == -32767)
+		if (GetAsyncKeyState(87) == -32767)
 		{
 			if (y_l > 1 + this->retreat)
 			{
@@ -85,9 +87,9 @@ GenerateActivity(); //test
 				ship_L.SetPosition(y_l, X);
 			}
 		}
-		if (GetAsyncKeyState(VK_DOWN) == -32767)
+		if (GetAsyncKeyState(83) == -32767)
 		{
-			if (y_l < this->Y - 1 + this->retreat)
+			if (y_l < this->Y - 2 + this->retreat)
 			{
 				y_l++;
 				ship_L.SetPosition(y_l, X);
@@ -103,7 +105,7 @@ GenerateActivity(); //test
 		}
 		if (GetAsyncKeyState(VK_NUMPAD2) == -32767)
 		{
-			if (y_r < this->Y - 1 + this->retreat)
+			if (y_r < this->Y - 2 + this->retreat)
 			{
 				y_r++;
 				ship_R.SetPosition(y_r, X);
@@ -123,9 +125,26 @@ GenerateActivity(); //test
 void Fild::ShipFire(Ship* ship_)
 {
 	if (ship_->GetSide() == Ship::Side::LEFT)
-	  this->listLine[ship_->GetPosition() - this->retreat]->SetActivity(4, Activity::TypeActyvity::bullet, 4, ship_); 
+		if (ship_->GetUp())
+		{
+			Fire(ship_, 4, 4, (ship_->GetPosition() - this->retreat) - 1);
+			Fire(ship_, 4, 4, (ship_->GetPosition() - this->retreat) + 1);
+		}
+		else
+			Fire(ship_, 4, 4, ship_->GetPosition() - this->retreat);
 	else if (ship_->GetSide() == Ship::Side::RIGHT)
-		this->listLine[ship_->GetPosition() - this->retreat]->SetActivity(-(this->X- 5), Activity::TypeActyvity::bullet, this->X - 5, ship_);
+		if (ship_->GetUp())
+		{
+			Fire(ship_, -(this->X - 5), this->X - 5, (ship_->GetPosition() - this->retreat) - 1);
+			Fire(ship_, -(this->X - 5), this->X - 5, (ship_->GetPosition() - this->retreat) + 1);
+		}
+		else
+			Fire(ship_, -(this->X - 5), this->X - 5, ship_->GetPosition() - this->retreat);
+}
+
+void Fild::Fire(Ship* ship_, int move_, int position_, int index_)
+{
+	this->listLine[index_]->SetActivity(move_, Activity::TypeActyvity::bullet, position_, ship_);
 }
 
 time_t t = time(0);
@@ -135,7 +154,7 @@ void Fild::GenerateActivity()
 	if ((time(0) - t ) > 2)//30sec
 	{
 		Activity::TypeActyvity typ = Activity::TypeActyvity::none;
-		int i = rand() % 3;
+		int i = rand() % 4;
 
 		switch (i)
 		{
@@ -152,6 +171,11 @@ void Fild::GenerateActivity()
 			case 2:
 			{
 				typ = Activity::TypeActyvity::amor;
+				break;
+			}
+			case 3:
+			{
+				typ = Activity::TypeActyvity::up;
 				break;
 			}
 		}
