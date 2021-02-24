@@ -33,6 +33,7 @@ public:
 	bool TakeAmunition();
 	void ReturnAmunition();
 	void SetShipColor(FG_COLORS color_);
+	FG_COLORS GetShipColor();
 	void SetUp(bool);
 	bool GetUp();
 private:

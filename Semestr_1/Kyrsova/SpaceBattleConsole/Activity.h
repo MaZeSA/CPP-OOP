@@ -26,6 +26,7 @@ public:
 	int GetX();
 	int GetY();
 	int GetLenght();
+	FG_COLORS GetColorAct();
 
 	private:
 	int X = 0,

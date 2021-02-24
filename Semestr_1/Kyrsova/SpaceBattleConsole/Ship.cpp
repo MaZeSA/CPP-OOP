@@ -114,17 +114,17 @@ void Ship::PrintLife()
 	int x = 2;
 
 	if (this->side == Side::RIGHT)
-		x = GetLenght() - (x + 20);
+		x = GetLenght() - (x + 24);
 
 	SetColor(FG_COLORS::FG_LIGHTGRAY, FG_COLORS::FG_LIGHTGRAY);
 	setCursorPosition(x, 1);
-	std::cout << "12345678901234567890";
+	std::cout << "123456789012345678901234";
 	
 	setCursorPosition(x , 1);
 
 	SetColor(FG_COLORS::FG_GREEN, FG_COLORS::FG_GREEN);
 	for (int i = 0; i < this->lives; i++)
-		std::cout << "12345";
+		std::cout << "123456";
 }
 
 bool Ship::HitCheck(int y_)
@@ -166,7 +166,7 @@ bool Ship::GetShield()
 
 void Ship::PrintShield()
 {
-	int x = 23;
+	int x = 27;
 	if (this->side == Side::RIGHT)
 		x = GetLenght() - (x + 8);
 
@@ -246,6 +246,11 @@ void Ship::ReturnAmunition()
 void Ship::SetShipColor(FG_COLORS color_)
 {
 	this->ShipColor = color_;
+}
+
+FG_COLORS Ship::GetShipColor()
+{
+	return this->ShipColor;
 }
 
 void Ship::SetUp(bool up_)

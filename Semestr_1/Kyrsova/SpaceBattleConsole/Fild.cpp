@@ -12,8 +12,7 @@ Fild::Fild(int x_, int y_, int retreat_)
 	{
 		this->listLine.push_back(new GameLine(retreat_ + i, x_));
 	}
-		
-	PreparationFild();
+	
 }
 
 void Fild::PreparationFild()
@@ -197,4 +196,5 @@ int Fild::GetMaxGen()
 {
 	return this->X / 3 * 2;
 }
+
 

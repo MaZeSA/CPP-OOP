@@ -26,6 +26,7 @@ char Activity::GetSymbol()
 
 void Activity::PrintMe()
 {
+    setTextColour(this->GetColorAct());
     setCursorPosition( X, Y);
     std::cout << (char)this->typeMe;
 }
@@ -157,4 +158,23 @@ int Activity::GetY()
 int Activity::GetLenght()
 {
     return this->lenghtFild;
+}
+
+FG_COLORS Activity::GetColorAct()
+{
+    if (this->typeMe == TypeActyvity::ammunition)
+        return FG_COLORS::FG_RED;
+    else if (this->typeMe == TypeActyvity::amor)
+        return FG_COLORS::FG_BROWN;
+    else if (this->typeMe == TypeActyvity::bullet)
+        if (this->ownerShip != nullptr)
+            return this->ownerShip->GetShipColor();
+        else
+            return FG_COLORS::FG_LIGHTRED;
+    else if (this->typeMe == TypeActyvity::hp)
+        return FG_COLORS::FG_GREEN;
+    else if (this->typeMe == TypeActyvity::up)
+        return FG_COLORS::FG_BLUE;
+
+    return FG_COLORS::FG_WHITE;
 }

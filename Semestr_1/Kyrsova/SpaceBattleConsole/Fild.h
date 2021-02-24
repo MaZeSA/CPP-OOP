@@ -20,7 +20,6 @@ public:
 	void GenerateActivity();
 	int GetMinGen();
 	int GetMaxGen();
-
 private:
 
 	Ship ship_L = Ship::Side::LEFT;

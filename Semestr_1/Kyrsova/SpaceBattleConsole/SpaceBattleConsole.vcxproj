@@ -143,6 +143,7 @@
     <ClCompile Include="ConsoleColor.cpp" />
     <ClCompile Include="Fild.cpp" />
     <ClCompile Include="GameLine.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SetCursor.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SpaceBattleConsole.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="Fild.h" />
     <ClInclude Include="GameLine.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="SetCursor.h" />
     <ClInclude Include="Ship.h" />
   </ItemGroup>
