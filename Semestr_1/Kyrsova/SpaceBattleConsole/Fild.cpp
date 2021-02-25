@@ -197,4 +197,14 @@ int Fild::GetMaxGen()
 	return this->X / 3 * 2;
 }
 
+void Fild::CleanFild(int y_start_, int y_end_, int x_start_, int x_end_)
+{
+	for (int y = y_start_; y < y_end_; y++)
+	{
+		setCursorPosition(x_start_, y);
+		for (int x = x_start_; x < x_end_; x++)
+			cout << " ";
+	}
+}
+
 

@@ -66,8 +66,9 @@ bool GameLine::GetChange()
 void GameLine::SetActivity(int indexMove_, Activity::TypeActyvity a_, int x_, Ship* ship_)
 {
 	if (a_ == Activity::TypeActyvity::bullet)
-		if (!ship_->TakeAmunition())
-			return;
+		if (ship_ != nullptr)
+			if (!ship_->TakeAmunition())
+				return;
 
 	this->listActyvity[x_]->SetState(indexMove_, a_, ship_);
 	SetChange(true);
