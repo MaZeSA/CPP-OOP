@@ -12,7 +12,7 @@ public:
 		RIGHT,
 		none
 	};
-	Ship(Side);
+	Ship(Side, bool*);
 	void Print();
 	void SetPosition(int, int);
 	int GetPosition();
@@ -36,7 +36,10 @@ public:
 	FG_COLORS GetShipColor();
 	void SetUp(bool);
 	bool GetUp();
+	int GetLives();
 private:
+	bool* liv=nullptr;
+
 	int	lives = 4; 
 	int shipWidth = 3;
 	int position_Y = 10;

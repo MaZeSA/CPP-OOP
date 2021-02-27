@@ -1,9 +1,10 @@
 #include "Ship.h"
 #include <iostream>
 
-Ship::Ship(Side s_)
+Ship::Ship(Side s_, bool* liv_)
 {
 	this->side = s_;
+	this->liv = liv_;
 }
 
 void Ship::Print()
@@ -97,6 +98,8 @@ void Ship::Damage()
 		this->lives--;
 		this->SetUp(false);
 	}
+	if (this->lives == 0)
+		*(this->liv) = false;
 }
 
 void Ship::SetHP(int hp_)
@@ -275,5 +278,10 @@ void Ship::SetUp(bool up_)
 bool Ship::GetUp()
 {
 	return this->up_ship;
+}
+
+int Ship::GetLives()
+{
+	return this->lives;
 }
 

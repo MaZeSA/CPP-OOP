@@ -5,6 +5,8 @@
 #include <Windows.h>
 #include "Ship.h"
 #include "Menu.h"
+#include <stdio.h>
+#include <conio.h>
 //
 //void setCursorPositio(int x, int y)
 //{
@@ -16,7 +18,14 @@
 
 int main()
 {
+	void* handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO structCursorInfo;
+	GetConsoleCursorInfo(handle, &structCursorInfo);
+	structCursorInfo.bVisible = FALSE;
+	SetConsoleCursorInfo(handle, &structCursorInfo);
+
 	srand((unsigned int)time(0));
+	Settings::GetSetting();
 
 	Menu menu(100, 20, 3);
 	menu.PrintLogo();
@@ -37,5 +46,5 @@ int main()
 		<< "Player 2 >> 'num 8', 'num 2', fire >'num 0'\n";
 
 	//fild.Play();
-
+	return 0;
 }

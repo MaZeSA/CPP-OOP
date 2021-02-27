@@ -19,10 +19,6 @@ void Fild::PreparationFild()
 {
 	setCursorPosition(X / 2 - 3, 0);
 	std::cout << "DevMode";	
-	//setCursorPosition(X / 2 - 3, 1);
-	//std::cout << "<Lives>"; 
-	//setCursorPosition(X / 2 - 6, 2);
-	//std::cout << "<Amunitions>";
 
 	ship_L.SetShipColor(FG_COLORS::FG_LIGHTRED);
 	ship_R.SetShipColor(FG_COLORS::FG_LIGHTBLUE);
@@ -69,16 +65,19 @@ void Fild::UpdateFild()
 void Fild::Play()
 {
 	int y_l = this->retreat + 10, y_r = this->retreat + 10;
-	
-	while (true)
+	this->liv = true;
+
+	cin.ignore();
+	cin.clear();
+	while (this->liv)
 	{
 		this_thread::sleep_for(std::chrono::milliseconds(40));
 
 		UpdateFild();
 		
-GenerateActivity(); //test
+		GenerateActivity(); //test
 
-		if (GetAsyncKeyState(87) == -32767)
+		if (GetAsyncKeyState(Settings::setting->Get_Up_key(1)) == -32767)
 		{
 			if (y_l > 1 + this->retreat)
 			{
@@ -86,7 +85,7 @@ GenerateActivity(); //test
 				ship_L.SetPosition(y_l, X);
 			}
 		}
-		if (GetAsyncKeyState(83) == -32767)
+		if (GetAsyncKeyState(Settings::setting->Get_Down_key(1)) == -32767)
 		{
 			if (y_l < this->Y - 2 + this->retreat)
 			{
@@ -94,7 +93,12 @@ GenerateActivity(); //test
 				ship_L.SetPosition(y_l, X);
 			}
 		}
-		if (GetAsyncKeyState(VK_NUMPAD8) == -32767)
+		if (GetAsyncKeyState(Settings::setting->Get_Shot_key(1)) == -32767)
+		{
+			ShipFire(&ship_L);
+		}
+		
+		if (GetAsyncKeyState((Settings::setting->Get_Up_key(2))) == -32767)
 		{
 			if (y_r > 1 + this->retreat)
 			{
@@ -102,7 +106,7 @@ GenerateActivity(); //test
 				ship_R.SetPosition(y_r, X);
 			}
 		}
-		if (GetAsyncKeyState(VK_NUMPAD2) == -32767)
+		if (GetAsyncKeyState(Settings::setting->Get_Down_key(2)) == -32767)
 		{
 			if (y_r < this->Y - 2 + this->retreat)
 			{
@@ -110,14 +114,15 @@ GenerateActivity(); //test
 				ship_R.SetPosition(y_r, X);
 			}
 		}
-		if (GetAsyncKeyState(VK_SPACE) == -32767)
-		{
-			ShipFire(&ship_L);
-		}
-		if (GetAsyncKeyState(VK_NUMPAD0) == -32767)
+		
+		if (GetAsyncKeyState(Settings::setting->Get_Shot_key(2)) == -32767)
 		{
 			ShipFire(&ship_R);
 		}
+		if (GetAsyncKeyState(VK_ESCAPE) == -32767)
+		{
+			this->liv= false;
+		}	
 	}
 }
 
@@ -205,6 +210,21 @@ void Fild::CleanFild(int y_start_, int y_end_, int x_start_, int x_end_)
 		for (int x = x_start_; x < x_end_; x++)
 			cout << " ";
 	}
+}
+
+int Fild::GetResultGame()
+{
+	if (!this->liv)
+		if (ship_L.GetLives() <= 0)
+			return 1;
+		else if (ship_R.GetLives() <= 0)
+			return 2;
+	return 0;
+}
+
+void Fild::ShowWiner(int w_)
+{
+
 }
 
 

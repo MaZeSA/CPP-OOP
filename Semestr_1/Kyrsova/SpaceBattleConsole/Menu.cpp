@@ -2,6 +2,8 @@
 #include <iostream>
 #include <thread>
 
+Menu::ListMenu menu(10, 52);
+
 void Menu::PrintLogo()
 {
 	this_thread::sleep_for(std::chrono::milliseconds(400));
@@ -23,27 +25,7 @@ void Menu::PrintLogo()
 	CleanFild(3, 15, 10, 90);
 	SpaseBatlePrint(3);
 
-	ListMenu menu(10, 52);
-	menu.PrintMenu();
-	while (true)
-	{
-		this_thread::sleep_for(std::chrono::milliseconds(40));
-
-		if (GetAsyncKeyState(38) == -32767)
-		{
-			--menu;
-		}
-		if (GetAsyncKeyState(40) == -32767)
-		{
-			++menu;
-		}
-		if (GetAsyncKeyState(VK_RETURN) == -32767)
-		{
-			menu.GetSelect();
-		}
-	
-	}
-
+	menu.PrintMenu(this);
 }
 
 void Menu::MazesaPrint()
@@ -98,7 +80,7 @@ void Menu::SpaseBatlePrint(int y_)
 		}
 	}
 	SetColor(FG_COLORS::FG_WHITE, FG_COLORS::FG_BLACK);
-	this_thread::sleep_for(std::chrono::milliseconds(800));
+	this_thread::sleep_for(std::chrono::milliseconds(500));
 	setCursorPosition(81, y_ + 5);
 	cout << "CONSOLE_";
 }
@@ -129,4 +111,33 @@ void Menu::PrintMenu()
 
 	}
 }
+
+void Menu::StartGame()
+{
+	CleanFild(3, 15, 10, 90);
+	PreparationFild();
+	Play();
+
+	if (this->GetResultGame() > 0)
+		if (this->GetResultGame() == 1)
+			cout << "Red is lost;";
+		else
+			cout << "Blue is lost";
+	RE();
+
+	CleanFild(0, 34, 1, 100);
+	SpaseBatlePrint(3);
+	menu.PrintMenu(this);
+}
+
+void Menu::Settings()
+{
+	CleanFild(10, 15,50, 90);
+	Settings::setting->Show(100);
+
+	CleanFild(0, 34, 0, 100);
+	SpaseBatlePrint(3);
+	menu.PrintMenu(this);
+}
+
 

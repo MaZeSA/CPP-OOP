@@ -1,6 +1,8 @@
 #pragma once
 #include "Fild.h"
 #include <iostream>
+#include <thread>
+
 class Menu : public Fild
 {
 public:
@@ -14,7 +16,7 @@ public:
 			this->x = x_;
 			this->y = y_;
 		}
-		void PrintMenu()
+		void PrintMenu(Menu* menu_)
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -23,7 +25,32 @@ public:
 			}
 			++(*this); 
 			--(*this);
+		
+			WaitUser(menu_);
 		}
+
+		void WaitUser(Menu* menu_)
+		{
+			while (true)
+			{
+				this_thread::sleep_for(std::chrono::milliseconds(40));
+
+				if (GetAsyncKeyState(38) == -32767)
+					--(*this);
+				if (GetAsyncKeyState(40) == -32767)
+					++(*this);
+				if (GetAsyncKeyState(VK_RETURN) == -32767)
+				{
+					if (this->GetSelect() == 0)
+						menu_->StartGame();
+					else if (this->GetSelect() == 1)
+						menu_->Settings();
+					else if (this->GetSelect() == 2)
+						exit(0);
+				}
+			}
+		}
+
 		void SelectMenu(FG_COLORS color, char c_)
 		{
 			setCursorPosition(this->x - 1, this->y + this->selectItem);
@@ -52,7 +79,7 @@ public:
 		}
 
 	private:
-		string menu[3] = {" Start Game"," Settings"," Exit" };
+		string menu[3] = {" Start Game"," Controls"," Exit" };
 		FG_COLORS defColor = FG_COLORS::FG_LIGHTGRAY;
 		FG_COLORS selColor = FG_COLORS::FG_YELLOW;
 		int selectItem = 0;
@@ -66,30 +93,21 @@ public:
 	void SpaseBatlePrint(int y_);
 	void RunBullet();
 	void PrintMenu();
-
+	void StartGame(); 
+	void Settings();
 private:
-	
-	std::string MaZeSa4[7] =
-	{
-		"II         II                IIIIIIIIII              IIIIIII             ",
-		"IIII     IIII      III              II     IIIII    II     II     III    ",
-		"II  II  II II   II    II           II    II     II  II          II   II  ",
-		"II   IIII  II  II      II        II     IIIIIIIII     IIIII    II     II ",
-		"II    II   II  II      II      II       II                 II  II     II ",
-		"II         II   II    III    II          II     II  II     II   II   III ",
-		"II         II    IIIII  II  IIIIIIIIII    IIIIIII    IIIIIII     IIII  II"
-	}; 
+
 	std::string MaZeSa[5] =
 	{
 		" ii     ii     i     iiiiii iiiiii  iiii     i    ",
-		" iii   iii    i i        i  i      i        i i   ",	
-		" ii i i ii   i   i     i    iiiiii  iiii   i   i  ",	
-		" ii  i  ii  iiiiiii   i     i           i iiiiiii ",	
+		" iii   iii    i i        ii i      i        i i   ",	
+		" ii i i ii   i   i     ii   iiiiii  iiii   i   i  ",	
+		" ii  i  ii  iiiiiii  ii     i           i iiiiiii ",	
 		" ii     ii ii     ii iiiiii iiiiii iiiii ii     ii"
 	};
 	std::string SpaseBatle[10] =
 	{
-		"     IIIII IIIII    I      IIIII IIIIII    IIIII      I   IIIIIIII II     IIIIII  ",
+		"    IIIII  IIIII    I      IIIII IIIIII    IIIII      I   IIIIIIII II     IIIIII  ",
 		"   II      II   I  I I    II     II        II   I    I I     II    II     II      ",
 		"    IIII   IIIII  I   I    IIII  IIIIII    IIIII    I   I    II    II     IIIIII  ",
 		"       II  II    IIIIIII      II II        II   I  IIIIIII   II    II     II      ",
