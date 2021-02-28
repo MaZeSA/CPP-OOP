@@ -40,7 +40,7 @@ void Settings::Show(int l_)
     setCursorPosition(30, 11);
     std::cout << "Key";
 
-    setTextColour(FG_COLORS::FG_CYAN);
+    setTextColour(FG_COLORS::FG_LIGHTRED);
     setCursorPosition(12, 13);
     std::cout << "Player 1:";
 
@@ -77,8 +77,6 @@ void Settings::Menu()
 {
     bool back = true;
     int sel = 0;
-    cin.ignore();
-    cin.clear();
 
     while (back)
     {
@@ -95,6 +93,7 @@ void Settings::Menu()
         if (GetAsyncKeyState(13) == -32767)
         {
             setCursorPosition(30, listKey[sel].indexY);
+           // cin.clear();
             int t = ret();
             *(listKey[sel].key) = t;
          
@@ -114,9 +113,11 @@ void Settings::PrintItem(FG_COLORS color_, Settings::Keys* key_)
 
 int Settings::ret()
 {
+    //cin.ignore();
+   // cin.clear();
     cout<<("Press any key");
     cin.ignore();
-    cin.clear();
+   // cin.clear();
     while (!_kbhit());
     return VkKeyScanEx(_getch(), GetKeyboardLayout(0));
 }

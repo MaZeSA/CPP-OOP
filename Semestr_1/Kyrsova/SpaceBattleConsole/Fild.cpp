@@ -17,8 +17,9 @@ Fild::Fild(int x_, int y_, int retreat_)
 
 void Fild::PreparationFild()
 {
-	setCursorPosition(X / 2 - 3, 0);
-	std::cout << "DevMode";	
+	setTextColour(FG_COLORS::FG_CYAN);
+	setCursorPosition(X / 2 - 6, 0);
+	std::cout << "Spase Battle";	
 
 	ship_L.SetShipColor(FG_COLORS::FG_LIGHTRED);
 	ship_R.SetShipColor(FG_COLORS::FG_LIGHTBLUE);
@@ -155,34 +156,20 @@ time_t t = time(0);
 void Fild::GenerateActivity()
 {
 	
-	if ((time(0) - t ) > 2)//30sec
+	if ((time(0) - t ) > 5)//30sec
 	{
 		Activity::TypeActyvity typ = Activity::TypeActyvity::none;
-		int i = rand() % 4;
+		int i = rand() % 100;
 
-		switch (i)
-		{
-			case 0:
-			{
-				typ = Activity::TypeActyvity::hp;
-				break;
-			}
-			case 1:
-			{
-				typ = Activity::TypeActyvity::ammunition;
-				break;
-			}
-			case 2:
-			{
-				typ = Activity::TypeActyvity::amor;
-				break;
-			}
-			case 3:
-			{
-				typ = Activity::TypeActyvity::up;
-				break;
-			}
-		}
+		if (i < 17)
+			typ = Activity::TypeActyvity::hp;
+		else if (i <60)
+			typ = Activity::TypeActyvity::ammunition;
+		else if (i < 85)
+			typ = Activity::TypeActyvity::amor;
+		else if (i < 100)
+			typ = Activity::TypeActyvity::up;
+
 		t = time(0);
 		
 		int y = 2 + rand() % (this->Y - this->retreat -2);
@@ -190,7 +177,6 @@ void Fild::GenerateActivity()
 
 		t = time(0);
 	}
-	
 }
 
 int Fild::GetMinGen()
@@ -222,9 +208,5 @@ int Fild::GetResultGame()
 	return 0;
 }
 
-void Fild::ShowWiner(int w_)
-{
-
-}
 
 

@@ -92,9 +92,9 @@ public:
 	void Present();
 	void SpaseBatlePrint(int y_);
 	void RunBullet();
-	void PrintMenu();
 	void StartGame(); 
 	void Settings();
+	void PrintFinal(int);
 private:
 
 	std::string MaZeSa[5] =

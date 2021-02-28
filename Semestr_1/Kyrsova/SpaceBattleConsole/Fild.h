@@ -23,7 +23,6 @@ public:
 	int GetMaxGen();
 	void CleanFild(int y_start_, int y_end_, int x_start, int x_end_);
 	int GetResultGame();
-	void ShowWiner(int w_);
 	void RE()
 	{
 		ship_L = *(new Ship(Ship::Side::LEFT, &liv));

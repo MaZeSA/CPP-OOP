@@ -99,19 +99,6 @@ void Menu::RunBullet()
 	}
 }
 
-void Menu::PrintMenu()
-{
-
-	setCursorPosition(45, 12);
-
-
-
-	while (true)
-	{
-
-	}
-}
-
 void Menu::StartGame()
 {
 	CleanFild(3, 15, 10, 90);
@@ -120,9 +107,10 @@ void Menu::StartGame()
 
 	if (this->GetResultGame() > 0)
 		if (this->GetResultGame() == 1)
-			cout << "Red is lost;";
+			PrintFinal(2);
 		else
-			cout << "Blue is lost";
+			PrintFinal(1);
+
 	RE();
 
 	CleanFild(0, 34, 1, 100);
@@ -138,6 +126,48 @@ void Menu::Settings()
 	CleanFild(0, 34, 0, 100);
 	SpaseBatlePrint(3);
 	menu.PrintMenu(this);
+}
+
+void Menu::PrintFinal(int w_)
+{
+	FG_COLORS leftColor = FG_COLORS::FG_LIGHTRED;
+	FG_COLORS rightColor = FG_COLORS::FG_LIGHTBLUE;
+	string leftText = "WINNER";
+	string rightText = "DEFEATED";
+	if (w_ == 2)
+	{
+		leftText = "DEFEATED";;
+		rightText = "WINNER";
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		setCursorPosition((100 / 2) - 40, 10 + i);
+		for (int t = 0; t < 80; t++)
+		{
+			if (t < 35)
+				SetColor(FG_COLORS::FG_WHITE, leftColor);
+			else if(t <45)
+				SetColor(FG_COLORS::FG_WHITE,FG_COLORS::FG_BLACK);
+			else
+				SetColor(FG_COLORS::FG_WHITE, rightColor);
+
+			cout << " ";
+		}
+	}
+	
+	SetColor(FG_COLORS::FG_BLACK, leftColor);
+	setCursorPosition((100 / 2) - (40/2)-6, 14);
+	cout << leftText;
+
+	setCursorPosition((100 / 2) + (40/2), 14);
+	SetColor(FG_COLORS::FG_BLACK, rightColor);
+	cout << rightText;
+	
+	SetColor(FG_COLORS::FG_LIGHTBLUE, FG_COLORS::FG_BLACK);
+	setCursorPosition((100 / 2) -20 , 21);
+	this_thread::sleep_for(std::chrono::seconds(3));
+	system("pause");
 }
 
 
